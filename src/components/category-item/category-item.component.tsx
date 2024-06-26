@@ -1,4 +1,4 @@
-import { TCategory } from '../types';
+import { TCategory } from '../../types';
 import './category-item.styles.scss';
 
 type TProps = {

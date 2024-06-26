@@ -1,5 +1,5 @@
 import CategoryItem from '../category-item/category-item.component';
-import { TCategory } from '../types';
+import { TCategory } from '../../types';
 import './directory.styles.scss';
 
 type TProps = {
