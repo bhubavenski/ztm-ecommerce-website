@@ -5,9 +5,9 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   type User,
-  signInWithRedirect,
   createUserWithEmailAndPassword,
-  UserCredential,
+  signInWithEmailAndPassword,
+  signOut,
 } from 'firebase/auth';
 import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
 
@@ -28,9 +28,10 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
-// export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
-export const signInWithGoogleRedirect = async () =>
-  await signInWithRedirect(auth, googleProvider);
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
+// export const signInWithGoogleRedirect = async () =>
+//   await signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
 
@@ -65,6 +66,47 @@ export const createAuthUserWithEmailAndPassword = async (
 ) => {
   if (!email || !password) return;
 
-  const response = await createUserWithEmailAndPassword(auth, email, password);
-  return response;
+  try {
+    const response = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    return response;
+  } catch (error: any) {
+    switch (error.code) {
+      case 'auth/wrong-password':
+        alert('incorrect password for email');
+        break;
+      default:
+        console.log(error);
+    }
+    return undefined;
+  }
 };
+
+export const signInAuthUserWithEmailAndPassword = async (
+  email: string,
+  password: string
+) => {
+  if (!email || !password) return;
+
+  try {
+    const response = await signInWithEmailAndPassword(auth, email, password);
+    return response;
+  } catch (error: any) {
+    switch (error.code) {
+      case 'auth/wrong-password':
+        alert('incorrect password for email');
+        break;
+      case 'auth/user-not-found':
+        alert('no user associated with this email');
+        break;
+      default:
+        console.log(error);
+    }
+    return undefined;
+  }
+};
+
+export const signOutUser = async () => await signOut(auth);

@@ -1,9 +1,10 @@
 import { useForm } from 'react-hook-form';
-import { SignUpFormSchema, TSignUpForm } from '@/types';
+import { SignInFormSchema, TSignInForm } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
-  createAuthUserWithEmailAndPassword,
   createUserDocFromAuth,
+  signInAuthUserWithEmailAndPassword,
+  signInWithGooglePopup,
 } from '@/utils/firebase/firebase.utils';
 import {
   Form,
@@ -16,62 +17,48 @@ import {
 } from '../ui/form';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useUserDataContext } from '@/contexts/user.context';
 
-const SignUpForm = () => {
+const SignInForm = () => {
   const userData = useUserDataContext();
-
-  const form = useForm<TSignUpForm>({
+  const form = useForm<TSignInForm>({
     defaultValues: {
-      name: '',
       email: '',
       password: '',
-      confirmPassword: '',
     },
     mode: 'onTouched',
-    resolver: zodResolver(SignUpFormSchema),
+    resolver: zodResolver(SignInFormSchema),
   });
 
-  const onSubmit = async (formData: TSignUpForm) => {
-    const response = await createAuthUserWithEmailAndPassword(
+  const signInWithGoogle = async () => {
+    const { user } = await signInWithGooglePopup();
+    await createUserDocFromAuth(user);
+  };
+
+  const onSubmit = async (formData: TSignInForm) => {
+    const response = await signInAuthUserWithEmailAndPassword(
       formData.email,
       formData.password
     );
-
     if (response) {
       const { user } = response;
-      await createUserDocFromAuth(user, { displayName: formData.name });
       userData.setCurrentUser(user);
       form.reset();
     } else {
-      console.error('Failed to create user');
+      console.error('Failed to sign in');
     }
   };
+
   return (
-    <div>
-      <h1 className=" text-xl font-bold">Don't have an account?</h1>
-      <p>You can create one!</p>
+    <div className="">
+      <h1 className=" text-xl font-bold">Already have an account?</h1>
+      <p>Sign in with your Email and Password</p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-8 w-[500px]"
         >
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Display name</FormLabel>
-                <FormControl>
-                  <Input placeholder="name..." {...field} />
-                </FormControl>
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <FormField
             control={form.control}
             name="email"
@@ -100,27 +87,22 @@ const SignUpForm = () => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirm password</FormLabel>
-                <FormControl>
-                  <Input placeholder="password..." {...field} />
-                </FormControl>
-                <FormDescription>Confirm your password.</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" disabled={form.formState.isSubmitting}>
-            Sign up
-          </Button>
+          <div className="flex justify-between">
+            <Button type="submit" disabled={form.formState.isSubmitting}>
+              Sign in
+            </Button>
+            <Button
+              type="button"
+              disabled={form.formState.isSubmitting}
+              onClick={signInWithGoogle}
+            >
+              Google sign in
+            </Button>
+          </div>
         </form>
       </Form>
     </div>
   );
 };
 
-export default SignUpForm;
+export default SignInForm;
