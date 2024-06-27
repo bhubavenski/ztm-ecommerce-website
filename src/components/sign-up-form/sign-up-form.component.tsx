@@ -16,11 +16,8 @@ import {
 } from '../ui/form';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-import { useUserDataContext } from '@/contexts/user.context';
 
 const SignUpForm = () => {
-  const userData = useUserDataContext();
-
   const form = useForm<TSignUpForm>({
     defaultValues: {
       name: '',
@@ -41,7 +38,6 @@ const SignUpForm = () => {
     if (response) {
       const { user } = response;
       await createUserDocFromAuth(user, { displayName: formData.name });
-      userData.setCurrentUser(user);
       form.reset();
     } else {
       console.error('Failed to create user');
@@ -49,12 +45,10 @@ const SignUpForm = () => {
   };
   return (
     <div>
-      <h1 className=" text-xl font-bold">Don't have an account?</h1>
-      <p>You can create one!</p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-[500px]"
+          className="space-y-8"
         >
           <FormField
             control={form.control}

@@ -6,14 +6,13 @@ import { Button } from '@/components/ui/button';
 import { signOutUser } from '@/utils/firebase/firebase.utils';
 
 const Navigation = () => {
-  const { currentUser, setCurrentUser } = useUserDataContext();
+  const { currentUser } = useUserDataContext();
 
   const signOutHandler = async () => {
     try {
       await signOutUser();
-      setCurrentUser(null);
     } catch (error) {
-      console.log('Error accured while signing out', error)
+      console.log('Error signing out', error)
     }
   };
   return (
@@ -28,7 +27,7 @@ const Navigation = () => {
             SHOP
           </Link>
           {currentUser ? (
-            <Button variant="ghost" onClick={}>
+            <Button variant="ghost" onClick={signOutHandler}>
               Sign Out
             </Button>
           ) : (

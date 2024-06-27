@@ -8,6 +8,7 @@ import Shop from './routes/shop/shop.component.tsx';
 import Navigation from './routes/navigation/navigation.components.tsx';
 import Auth from './routes/auth/auth.component.tsx';
 import { UserProvider } from './contexts/user.context.tsx';
+import { ShopDataProvider } from './contexts/products.context.tsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -32,7 +33,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <UserProvider>
-      <RouterProvider router={router} />
+      <ShopDataProvider>
+        <RouterProvider router={router} />
+      </ShopDataProvider>
     </UserProvider>
   </React.StrictMode>
 );

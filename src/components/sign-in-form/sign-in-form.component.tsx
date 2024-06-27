@@ -17,11 +17,8 @@ import {
 } from '../ui/form';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useUserDataContext } from '@/contexts/user.context';
 
 const SignInForm = () => {
-  const userData = useUserDataContext();
   const form = useForm<TSignInForm>({
     defaultValues: {
       email: '',
@@ -42,8 +39,6 @@ const SignInForm = () => {
       formData.password
     );
     if (response) {
-      const { user } = response;
-      userData.setCurrentUser(user);
       form.reset();
     } else {
       console.error('Failed to sign in');
@@ -52,12 +47,10 @@ const SignInForm = () => {
 
   return (
     <div className="">
-      <h1 className=" text-xl font-bold">Already have an account?</h1>
-      <p>Sign in with your Email and Password</p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-[500px]"
+          className="space-y-8"
         >
           <FormField
             control={form.control}

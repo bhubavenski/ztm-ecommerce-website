@@ -27,6 +27,15 @@ export const SignUpFormSchema = BasicSignUpFormSchema.refine(
 );
 export type TSignUpForm = z.infer<typeof SignUpFormSchema>;
 
-export const SignInFormSchema = BasicSignUpFormSchema.pick({email: true, password: true});
+export const SignInFormSchema = BasicSignUpFormSchema.pick({
+  email: true,
+  password: true,
+});
 export type TSignInForm = z.infer<typeof SignInFormSchema>;
 
+export type TProduct = {
+  id: number;
+  name: string;
+  imageUrl: string;
+  price: number;
+};
