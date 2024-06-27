@@ -38,4 +38,5 @@ export type TProduct = {
   name: string;
   imageUrl: string;
   price: number;
+  quantity?:number;
 };

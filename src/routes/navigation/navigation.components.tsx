@@ -4,6 +4,7 @@ import './navigation.styles.scss';
 import { useUserDataContext } from '@/contexts/user.context';
 import { Button } from '@/components/ui/button';
 import { signOutUser } from '@/utils/firebase/firebase.utils';
+import CartIcon from '@/components/cart-icon/cart-icon.component';
 
 const Navigation = () => {
   const { currentUser } = useUserDataContext();
@@ -37,6 +38,7 @@ const Navigation = () => {
               </Link>
             </Button>
           )}
+          <CartIcon/>
         </div>
       </div>
       <Outlet />

@@ -9,6 +9,8 @@ import Navigation from './routes/navigation/navigation.components.tsx';
 import Auth from './routes/auth/auth.component.tsx';
 import { UserProvider } from './contexts/user.context.tsx';
 import { ShopDataProvider } from './contexts/products.context.tsx';
+import { CartDataProvider } from './contexts/cart.context.tsx';
+import CheckOut from './routes/check-out/check-out.component.tsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -23,6 +25,10 @@ const router = createBrowserRouter([
         element: <Shop />,
       },
       {
+        path: 'checkout',
+        element: <CheckOut />,
+      },
+      {
         path: 'auth',
         element: <Auth />,
       },
@@ -34,7 +40,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <UserProvider>
       <ShopDataProvider>
-        <RouterProvider router={router} />
+        <CartDataProvider>
+          <RouterProvider router={router} />
+        </CartDataProvider>
       </ShopDataProvider>
     </UserProvider>
   </React.StrictMode>
