@@ -1,4 +1,4 @@
-import { userDocArgs } from '@/types';
+import { CategoryMap, TCollection, userDocArgs } from '@/types';
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
@@ -10,7 +10,17 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
+import {
+  doc,
+  getDoc,
+  getFirestore,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from 'firebase/firestore';
+import { object } from 'zod';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDe5c0h3UkOe5BxX0SqIWWyNC4T7f7OGTg',
@@ -31,10 +41,36 @@ googleProvider.setCustomParameters({
 export const auth = getAuth();
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
-// export const signInWithGoogleRedirect = async () =>
-//   await signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
+
+export const createCollectionAndDocuments = async (
+  collectionKey: string,
+  objectsToAdd: TCollection[]
+) => {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((obj:TCollection) => {
+    const docRef = doc(collectionRef, obj.title.toLowerCase());
+    batch.set(docRef, obj);
+  });
+  await batch.commit();
+};
+
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, 'categories');
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const categoryMap = querySnapshot.docs.reduce((acc: CategoryMap, docSnapshot) => {
+    const data = docSnapshot.data();
+    const { title, products } = data as TCollection;
+    acc[title.toLowerCase()] = products;
+    return acc;
+  }, {} as CategoryMap);
+  return categoryMap;
+};
 
 export const createUserDocFromAuth = async (
   userAuth: User,
@@ -112,5 +148,5 @@ export const signInAuthUserWithEmailAndPassword = async (
 
 export const signOutUser = async () => await signOut(auth);
 
-export const onAuthStateChangedListener = (callback: (user:any) => any) =>
+export const onAuthStateChangedListener = (callback: (user: any) => any) =>
   onAuthStateChanged(auth, callback);

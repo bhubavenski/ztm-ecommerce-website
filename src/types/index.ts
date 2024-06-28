@@ -38,5 +38,11 @@ export type TProduct = {
   name: string;
   imageUrl: string;
   price: number;
-  quantity?:number;
+  quantity?: number;
 };
+
+export type TCollection = { title: string; products: TProduct[] };
+
+export type CategoryMap = {
+  [key: string]: TProduct[];
+}

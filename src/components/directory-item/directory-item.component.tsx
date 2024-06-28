@@ -1,21 +1,21 @@
 import { TCategory } from '../../types';
-import './category-item.styles.scss';
+import './directory-item.styles.scss';
 
 type TProps = {
   category: TCategory;
 };
 
-const CategoryItem = ({ category }: TProps) => {
+const DirectoryItem = ({ category }: TProps) => {
   const { imageUrl, title } = category;
   return (
-    <div className="category-container">
+    <div className="directory-item-container">
       <div
         className="background-image"
         style={{
           backgroundImage: `url(${imageUrl})`,
         }}
       />
-      <div className="category-body-container">
+      <div className="body">
         <h2>{title}</h2>
         <p>Shop Now</p>
       </div>
@@ -23,4 +23,4 @@ const CategoryItem = ({ category }: TProps) => {
   );
 };
 
-export default CategoryItem;
+export default DirectoryItem;
