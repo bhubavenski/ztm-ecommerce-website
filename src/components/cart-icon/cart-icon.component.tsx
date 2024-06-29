@@ -19,15 +19,21 @@ const CartIcon = () => {
       <DropdownMenuContent className="">
         <DropdownMenuLabel>My cart</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {cartItems.map((item) => (
-          <DropdownMenuItem key={item.id}>
-            <CartItem item={item} />
+        {cartItems.length > 0 ? (
+          cartItems.map((item) => (
+            <DropdownMenuItem key={item.id}>
+              <CartItem item={item} />
+            </DropdownMenuItem>
+          ))
+        ) : (
+          <DropdownMenuItem key='empty-cart'>
+            <span>Your cart is empty</span>
           </DropdownMenuItem>
-        ))}
+        )}
         <DropdownMenuSeparator />
         <div className="flex items-center justify-center my-4">
           <Button variant="ghost" asChild>
-            <Link to='checkout'>GO TO CHECKOUT</Link>
+            <Link to="checkout">GO TO CHECKOUT</Link>
           </Button>
         </div>
       </DropdownMenuContent>

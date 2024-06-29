@@ -1,10 +1,9 @@
 import { Link, Outlet } from 'react-router-dom';
-// import CrwnLogol from '../../assets/crown.svg';
-import './navigation.styles.scss';
 import { useUserDataContext } from '@/contexts/user.context';
 import { Button } from '@/components/ui/button';
 import { signOutUser } from '@/utils/firebase/firebase.utils';
 import CartIcon from '@/components/cart-icon/cart-icon.component';
+import { LogoContainer, NavLinks, NavigationContainer } from './navigation.styles';
 
 const Navigation = () => {
   const { currentUser } = useUserDataContext();
@@ -18,15 +17,15 @@ const Navigation = () => {
   };
   return (
     <>
-      <div className="navigation">
+      <NavigationContainer>
         <Link className="logo-container" to="/">
           {/* <CrwnLogol /> */}
           <div className="mylogo">Logo</div>
         </Link>
-        <div className="nav-links-container">
-          <Link className="nav-link" to="/shop">
+        <NavLinks>
+          <LogoContainer to="/shop">
             SHOP
-          </Link>
+          </LogoContainer>
           {currentUser ? (
             <Button variant="ghost" onClick={signOutHandler}>
               Sign Out
@@ -39,8 +38,8 @@ const Navigation = () => {
             </Button>
           )}
           <CartIcon/>
-        </div>
-      </div>
+        </NavLinks>
+      </NavigationContainer>
       <Outlet />
     </>
   );
