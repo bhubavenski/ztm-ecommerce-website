@@ -8,6 +8,7 @@ export type TCategory = {
   id: number;
   title: string;
   imageUrl: string;
+  route: string;
 };
 
 const BasicSignUpFormSchema = z.object({
@@ -45,4 +46,4 @@ export type TCollection = { title: string; products: TProduct[] };
 
 export type CategoryMap = {
   [key: string]: TProduct[];
-}
+};

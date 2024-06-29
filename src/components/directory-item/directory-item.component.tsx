@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { TCategory } from '../../types';
 import {
   DirectoryItemContainer,
@@ -10,9 +11,12 @@ type TProps = {
 };
 
 const DirectoryItem = ({ category }: TProps) => {
-  const { imageUrl, title } = category;
+  const { imageUrl, title, route } = category;
+  const navigate = useNavigate();
+  const onClickHandler = () => navigate(route);
+
   return (
-    <DirectoryItemContainer>
+    <DirectoryItemContainer onClick={onClickHandler}>
       <BackgroundImage imageUrl={imageUrl} />
       <Body>
         <h2>{title}</h2>
