@@ -18,7 +18,6 @@ const BasicSignUpFormSchema = z.object({
   confirmPassword: z.string().min(1),
 });
 
-// Пълна схема с refine
 export const SignUpFormSchema = BasicSignUpFormSchema.refine(
   (data) => data.password === data.confirmPassword,
   {

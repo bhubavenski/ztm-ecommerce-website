@@ -12,6 +12,6 @@ export const userReducer = (state: TState = INITIAL_STATE, action: TAction) => {
       return { ...state, currentUser: payload };
     }
     default:
-      state;
+      return state;
   }
 };

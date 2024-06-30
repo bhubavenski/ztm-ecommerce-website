@@ -1,15 +1,22 @@
 import Navigation from '@/components/navigation/navigation.component';
-import { createUserDocFromAuth, onAuthStateChangedListener } from '@/utils/firebase/firebase.utils';
+import { setCurrentUser } from '@/store/user/user.action';
+import {
+  createUserDocFromAuth,
+  onAuthStateChangedListener,
+} from '@/utils/firebase/firebase.utils';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
 const Root = () => {
+  const dispatch = useDispatch();
+  
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user:any) => {
-      if(user) {
-        createUserDocFromAuth(user)
+    const unsubscribe = onAuthStateChangedListener((user: any) => {
+      if (user) {
+        createUserDocFromAuth(user);
       }
-      setCurrentUser(user);
+      dispatch(setCurrentUser(user));
     });
     return unsubscribe;
   }, []);

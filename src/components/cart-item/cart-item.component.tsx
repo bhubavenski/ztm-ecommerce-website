@@ -11,8 +11,10 @@ const CartItem = ({ item }: Props) => {
       <div className="size-[100px] overflow-hidden">
         <img src={item.imageUrl} alt={item.name} className="w-full" />
       </div>
-      <div className='text-lg'>
-        <h3>{item.quantity} X {item.name}</h3>
+      <div className="text-lg">
+        <h3>
+          {item.quantity} X {item.name}
+        </h3>
         <h4>{item.price}$</h4>
       </div>
     </div>

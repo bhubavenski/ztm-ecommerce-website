@@ -11,8 +11,13 @@ import {
 import { useCartDataContext } from '@/contexts/cart.context';
 
 const CheckOut = () => {
-  const { cartItems, addItemToCart, removeItemFromCart, clearItemFromCart, cartTotal } =
-    useCartDataContext();
+  const {
+    cartItems,
+    addItemToCart,
+    removeItemFromCart,
+    clearItemFromCart,
+    cartTotal,
+  } = useCartDataContext();
 
   return (
     <Table className="">

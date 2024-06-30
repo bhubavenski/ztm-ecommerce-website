@@ -14,7 +14,6 @@ const DirectoryItem = ({ category }: TProps) => {
   const { imageUrl, title, route } = category;
   const navigate = useNavigate();
   const onClickHandler = () => navigate(route);
-
   return (
     <DirectoryItemContainer onClick={onClickHandler}>
       <BackgroundImage imageUrl={imageUrl} />

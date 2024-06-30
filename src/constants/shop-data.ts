@@ -1,6 +1,5 @@
 import { TCollection, TProduct } from '@/types';
 
-
 export const SHOP_DATA: TCollection[] = [
   {
     title: 'Hats',

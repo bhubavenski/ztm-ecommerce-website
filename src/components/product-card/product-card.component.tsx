@@ -13,7 +13,7 @@ const ProductCard = ({ product }: Props) => {
   const { addItemToCart } = useCartDataContext();
 
   const handleClick = () => {
-    addItemToCart(product)
+    addItemToCart(product);
   };
 
   return (

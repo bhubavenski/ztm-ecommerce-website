@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import './globals.css';
 import './index.scss';
 import { Provider } from 'react-redux';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
@@ -51,12 +50,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
+    <Provider store={store}>
       <ShopDataProvider>
         <CartDataProvider>
           <RouterProvider router={router} />
         </CartDataProvider>
       </ShopDataProvider>
-    {/* </Provider> */}
+    </Provider>
   </React.StrictMode>
 );
