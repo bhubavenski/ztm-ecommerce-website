@@ -1,9 +1,9 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useUserDataContext } from '@/contexts/user.context';
 import { Button } from '@/components/ui/button';
 import { signOutUser } from '@/utils/firebase/firebase.utils';
 import CartIcon from '@/components/cart-icon/cart-icon.component';
-import { LogoContainer, NavLinks, NavigationContainer } from './navigation.styles';
+import { LogoContainer, NavLinks, NavigationContainer } from './navigation.styles.ts';
 
 const Navigation = () => {
   const { currentUser } = useUserDataContext();
@@ -15,6 +15,7 @@ const Navigation = () => {
       console.log('Error signing out', error)
     }
   };
+
   return (
     <>
       <NavigationContainer>
@@ -40,7 +41,6 @@ const Navigation = () => {
           <CartIcon/>
         </NavLinks>
       </NavigationContainer>
-      <Outlet />
     </>
   );
 };
