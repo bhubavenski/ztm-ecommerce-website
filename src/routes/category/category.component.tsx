@@ -17,17 +17,20 @@ const Category = () => {
   console.log('MyComponent rendered');
 
   const { category } = useParams();
-  const categoriesMap = useSelector(selectProductsByCategory);
+  const products = useSelector(function _selectProductsByCategory(
+    state: RootState
+  ) {
+    return selectProductsByCategory(state, category!);
+  });
+
   return (
     <Fragment>
       <Title>{category!.toUpperCase()}</Title>
       <CategoryContainer>
-        {/* {products?.length > 0 ? (
-          products.map((product:TProduct) => (
+        {products &&
+          products.map((product: TProduct) => (
             <ProductCard key={product.id} product={product} />
-          ))
-        ) : ( )}*/}
-        <span>There are no products left</span>
+          ))}
       </CategoryContainer>
     </Fragment>
   );

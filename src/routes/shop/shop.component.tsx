@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
 const Shop = () => {
+  console.log('Shop component rendered')
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -4,15 +4,18 @@ import {
   createUserDocFromAuth,
   onAuthStateChangedListener,
 } from '@/utils/firebase/firebase.utils';
+import { User } from 'firebase/auth';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
 const Root = () => {
+  console.log('Root component rendered')
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user: any) => {
+    const unsubscribe = onAuthStateChangedListener((user: User) => {
       if (user) {
         createUserDocFromAuth(user);
       }
