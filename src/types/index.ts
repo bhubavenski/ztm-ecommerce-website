@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export type userDocArgs = {
+export type TUserDocArgs = {
   displayName: string;
 };
 
@@ -43,6 +43,6 @@ export type TProduct = {
 
 export type TCollection = { title: string; products: TProduct[] };
 
-export type CategoryMap = {
+export type TCategoryMap = {
   [key: string]: TProduct[];
 };

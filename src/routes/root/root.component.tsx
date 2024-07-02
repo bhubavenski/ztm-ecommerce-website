@@ -10,7 +10,7 @@ import { Outlet } from 'react-router-dom';
 
 const Root = () => {
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user: any) => {
       if (user) {

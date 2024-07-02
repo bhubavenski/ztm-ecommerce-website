@@ -1,16 +1,21 @@
-import { useShopDataContext } from '@/contexts/categories.context';
 import './categories-preview.styles.scss';
 import { Fragment } from 'react/jsx-runtime';
 import CategoryPreview from '@/components/category-preview/category-preview.component';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/root-reducer';
+import { isCategoryMap } from '@/utils/utils';
 
 const CategoriesPreview = () => {
-  const { categoriesMap } = useShopDataContext();
+  const categoriesArr = useSelector(
+    (state: RootState) => state.categories.categoriesArr
+  );
   return (
     <Fragment>
-      {Object.keys(categoriesMap).map((key) => {
-        const products = categoriesMap[key];
-        return <CategoryPreview key={key} title={key} products={products} />;
-      })}
+      {categoriesArr.length > 0 ? (
+          categoriesArr.map((category)=> <CategoryPreview key={category.title} title={category.title} products={category.products} />)
+      ) : (
+        <span>There is no categories</span>
+      )}
     </Fragment>
   );
 };

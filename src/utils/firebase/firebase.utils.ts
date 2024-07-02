@@ -1,4 +1,4 @@
-import { CategoryMap, TCollection, userDocArgs } from '@/types';
+import { TCategoryMap, TCollection, TUserDocArgs } from '@/types';
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
@@ -51,30 +51,25 @@ export const createCollectionAndDocuments = async (
   const collectionRef = collection(db, collectionKey);
   const batch = writeBatch(db);
 
-  objectsToAdd.forEach((obj:TCollection) => {
+  objectsToAdd.forEach((obj: TCollection) => {
     const docRef = doc(collectionRef, obj.title.toLowerCase());
     batch.set(docRef, obj);
   });
   await batch.commit();
 };
 
-export const getCategoriesAndDocuments = async () => {
-  const collectionRef = collection(db, 'categories');
+export const getCategoriesAndDocuments = async (category:string) => {
+  const collectionRef = collection(db, category);
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
-  const categoryMap = querySnapshot.docs.reduce((acc: CategoryMap, docSnapshot) => {
-    const data = docSnapshot.data();
-    const { title, products } = data as TCollection;
-    acc[title.toLowerCase()] = products;
-    return acc;
-  }, {} as CategoryMap);
-  return categoryMap;
+  const result = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+  return result;
 };
 
 export const createUserDocFromAuth = async (
   userAuth: User,
-  args?: userDocArgs
+  args?: TUserDocArgs
 ) => {
   if (!userAuth) return;
   const userDocRef = doc(db, 'users', userAuth.uid);

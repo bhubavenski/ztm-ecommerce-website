@@ -6,7 +6,6 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './routes/home/home.component.tsx';
 import Shop from './routes/shop/shop.component.tsx';
 import Auth from './routes/auth/auth.component.tsx';
-import { ShopDataProvider } from './contexts/categories.context.tsx';
 import { CartDataProvider } from './contexts/cart.context.tsx';
 import CheckOut from './routes/check-out/check-out.component.tsx';
 import CategoriesPreview from './routes/categories-preview.componen/categories-preview.component.tsx';
@@ -49,13 +48,9 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
     <Provider store={store}>
-      <ShopDataProvider>
-        <CartDataProvider>
-          <RouterProvider router={router} />
-        </CartDataProvider>
-      </ShopDataProvider>
+      <CartDataProvider>
+        <RouterProvider router={router} />
+      </CartDataProvider>
     </Provider>
-  </React.StrictMode>
 );

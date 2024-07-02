@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { TCategory } from '../../types';
 import {
   DirectoryItemContainer,
   BackgroundImage,
   Body,
 } from './directory-item.styles';
+import { TCategory } from '@/types';
 
 type TProps = {
   category: TCategory;
