@@ -6,13 +6,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useCartDataContext } from '@/contexts/cart.context';
 import CartItem from '../cart-item/cart-item.component';
 import { Button } from '../ui/button';
 import { Link } from 'react-router-dom';
+import { selectCartCount, selectCartItems } from '@/store/cart/cart.selector';
+import { useSelector } from 'react-redux';
 
 const CartIcon = () => {
-  const { cartItems, cartCount } = useCartDataContext();
+  const cartCount = useSelector(selectCartCount);
+  const cartItems = useSelector(selectCartItems);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>Cart {cartCount}</DropdownMenuTrigger>
@@ -26,7 +29,7 @@ const CartIcon = () => {
             </DropdownMenuItem>
           ))
         ) : (
-          <DropdownMenuItem key='empty-cart'>
+          <DropdownMenuItem key="empty-cart">
             <span>Your cart is empty</span>
           </DropdownMenuItem>
         )}

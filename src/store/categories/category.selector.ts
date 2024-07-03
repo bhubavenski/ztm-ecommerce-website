@@ -1,24 +1,21 @@
-import { RootState } from "../root-reducer";
+import { createSelector } from 'reselect';
+import { RootState } from '../root-reducer';
+import { TCategory } from '@/types';
 
-export const selectCategoriesMap = (state:RootState) => {
-  console.log('categoriesArr =', state)
-  const categoriesMap = state.categories.categoriesArr.reduce(
-    (acc, { title, items }) => {
-      console.log('acc=',acc)
-      console.log('{}=',{title, items})
-      
+// Селектор за извличане на категорията от Redux state
+const selectCategoryReducer = (state: RootState) => state.categories;
 
-      acc[title.toLowerCase()] = items;
-      return acc;
-    },
-    {}
-  );
-  console.log('categoriesMap =', categoriesMap)
-  return categoriesMap;
-};
+// Селектор за извличане на масива от категории
+export const selectCategories = createSelector(
+  [selectCategoryReducer],
+  (categoriesSlice) => categoriesSlice.categoriesArr
+);
 
-export const selectProductsByCategory = (state: RootState, categories: string) => {
-  const category = state.categories.categoriesArr.find(category => category.title === categories);
-  console.log('selectProductsByCategory fired =', category)
-  return category ? category.products : [];
-}
+// Фабрична функция за създаване на селектор с параметър `title`
+export const makeSelectProductsByCategory = (categoryTitle: string) => createSelector(
+  [selectCategories],
+  (categories) => {
+    const category = categories.find(category => category.title === categoryTitle);
+    return category ? category.products : [];
+  }
+);

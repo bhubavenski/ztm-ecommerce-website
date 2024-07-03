@@ -1,4 +1,3 @@
-import React, { Fragment } from 'react';
 import {
   Table,
   TableBody,
@@ -8,17 +7,18 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useCartDataContext } from '@/contexts/cart.context';
+import { selectCartItems, selectCartTotal } from '@/store/cart/cart.selector';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  clearItemFromCart,
+  addItemToCart,
+  removeItemFromCart,
+} from '@/store/cart/cart.action';
 
 const CheckOut = () => {
-  const {
-    cartItems,
-    addItemToCart,
-    removeItemFromCart,
-    clearItemFromCart,
-    cartTotal,
-  } = useCartDataContext();
-
+  const cartItems = useSelector(selectCartItems);
+  const cartTotal = useSelector(selectCartTotal);
+  const dispatch = useDispatch();
   return (
     <Table className="">
       <TableCaption>{cartTotal}$</TableCaption>
@@ -33,9 +33,11 @@ const CheckOut = () => {
       </TableHeader>
       <TableBody>
         {cartItems.map((item) => {
-          const addItemHandler = () => addItemToCart(item);
-          const removeItemHandler = () => removeItemFromCart(item);
-          const clearItemHandler = () => clearItemFromCart(item);
+          const clearItemHandler = () =>
+            dispatch(clearItemFromCart(cartItems, item));
+          const addItemHandler = () => dispatch(addItemToCart(cartItems, item));
+          const removeItemHandler = () =>
+            dispatch(removeItemFromCart(cartItems, item));
           return (
             <TableRow key={item.id}>
               <TableCell>

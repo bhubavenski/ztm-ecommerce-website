@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
 import { Provider } from 'react-redux';
@@ -6,9 +5,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './routes/home/home.component.tsx';
 import Shop from './routes/shop/shop.component.tsx';
 import Auth from './routes/auth/auth.component.tsx';
-import { CartDataProvider } from './contexts/cart.context.tsx';
 import CheckOut from './routes/check-out/check-out.component.tsx';
-import CategoriesPreview from './routes/categories-preview.componen/categories-preview.component.tsx';
+import CategoriesPreview from './routes/categories-preview/categories-preview.component.tsx';
 import Category from './routes/category/category.component.tsx';
 import { store } from './store/store.ts';
 import Root from './routes/root/root.component.tsx';
@@ -48,9 +46,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <Provider store={store}>
-      <CartDataProvider>
-        <RouterProvider router={router} />
-      </CartDataProvider>
-    </Provider>
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );
