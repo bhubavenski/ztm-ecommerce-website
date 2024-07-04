@@ -6,7 +6,7 @@ export type TState = {
   cartTotal: number;
 };
 
-export type TCART_ACTION_TYPES = 'SET_CART_ITEMS';
+export type TCART_ACTION_TYPES = 'cart/SET_CART_ITEMS';
 
 export type TAction = {
   type: TCART_ACTION_TYPES;

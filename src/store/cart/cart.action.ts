@@ -38,17 +38,35 @@ const clearCartItem = (cartItems: TProduct[], productToClear: TProduct) => {
   return cartItems.filter((cartItem) => cartItem.id !== productToClear.id);
 };
 
-export const addItemToCart = (cartItems:TProduct[], productToAdd: TProduct) => {
+export const addItemToCart = (
+  cartItems: TProduct[],
+  productToAdd: TProduct
+) => {
   const newCartItems = addCartItem(cartItems, productToAdd);
-  return createAction<TCART_ACTION_TYPES,TProduct[]>('SET_CART_ITEMS', newCartItems);
+  return createAction<TCART_ACTION_TYPES, TProduct[]>(
+    'cart/SET_CART_ITEMS',
+    newCartItems
+  );
 };
 
-export const removeItemFromCart = (cartItems:TProduct[], cartItemToRemove: TProduct) => {
+export const removeItemFromCart = (
+  cartItems: TProduct[],
+  cartItemToRemove: TProduct
+) => {
   const newCartItems = removeCartItem(cartItems, cartItemToRemove);
-  return createAction<TCART_ACTION_TYPES,TProduct[]>('SET_CART_ITEMS', newCartItems);
+  return createAction<TCART_ACTION_TYPES, TProduct[]>(
+    'cart/SET_CART_ITEMS',
+    newCartItems
+  );
 };
 
-export const clearItemFromCart = (cartItems:TProduct[], cartItemToClear: TProduct) => {
+export const clearItemFromCart = (
+  cartItems: TProduct[],
+  cartItemToClear: TProduct
+) => {
   const newCartItems = clearCartItem(cartItems, cartItemToClear);
-  return createAction<TCART_ACTION_TYPES,TProduct[]> ('SET_CART_ITEMS', newCartItems);
+  return createAction<TCART_ACTION_TYPES, TProduct[]>(
+    'cart/SET_CART_ITEMS',
+    newCartItems
+  );
 };

@@ -5,5 +5,5 @@ import { createAction } from '@/utils/reducer/reducer.utils';
 export const setCurrentUser = (user: User) => {
   console.log('USE EFFECT setCurrentUser fired');
 
-  return createAction<TUSER_ACTION_TYPES, User>('SET_CURRENT_USER', user);
+  return createAction<TUSER_ACTION_TYPES, User>('user/SET_CURRENT_USER', user);
 };
