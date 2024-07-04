@@ -5,9 +5,7 @@ export type TState = {
   categoriesArr: DocumentData[] | [];
 };
 
-export type TCATEGORIES_ACTION_TYPES = 'category/SET_CATEGORIES';
-
 export type TAction = {
-  type: TCATEGORIES_ACTION_TYPES;
+  type: 'category/SET_CATEGORIES';
   payload: DocumentData[];
 };

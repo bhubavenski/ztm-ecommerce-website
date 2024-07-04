@@ -4,9 +4,7 @@ export type TState = {
   currentUser: User | null;
 };
 
-export type TUSER_ACTION_TYPES = 'user/SET_CURRENT_USER';
-
 export type TAction = {
-  type: TUSER_ACTION_TYPES;
+  type: 'user/SET_CURRENT_USER';
   payload: User;
 };
