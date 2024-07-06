@@ -1,12 +1,14 @@
 import { TProduct } from '@/types';
 
-export type TState = {
+export type TCartState = {
   cartItems: TProduct[];
   cartCount: number;
   cartTotal: number;
 };
 
-export type TAction = {
-  type: 'cart/SET_CART_ITEMS';
+export type TCART_ACTION_TYPES = 'cart/SET_CART_ITEMS'
+
+export type TCartAction = {
+  type: TCART_ACTION_TYPES;
   payload: User;
 };

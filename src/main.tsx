@@ -8,8 +8,10 @@ import Auth from './routes/auth/auth.component.tsx';
 import CheckOut from './routes/check-out/check-out.component.tsx';
 import CategoriesPreview from './routes/categories-preview/categories-preview.component.tsx';
 import Category from './routes/category/category.component.tsx';
-import { store } from './store/store.ts';
+import { persistor, store } from './store/store.ts';
 import Root from './routes/root/root.component.tsx';
+import React from 'react';
+import { PersistGate } from 'redux-persist/integration/react';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -46,7 +48,11 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <Provider store={store}>
-    <RouterProvider router={router} />
-  </Provider>
+  <React.StrictMode>
+    <PersistGate loading={null} persistor={persistor}>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </PersistGate>
+  </React.StrictMode>
 );

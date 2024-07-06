@@ -1,15 +1,15 @@
-import { TAction, TState } from './cart';
+import { TCartAction, TCartState } from './cart';
 
-const INITIAL_STATE: TState = {
+const INITIAL_STATE: TCartState = {
   cartItems: [],
   cartCount: 0,
   cartTotal: 0,
 };
 
 export const cartReducer = (
-  state: TState = INITIAL_STATE,
-  action: TAction
-): TState => {
+  state: TCartState = INITIAL_STATE,
+  action: TCartAction
+): TCartState => {
   const { type, payload } = action;
 
   switch (type) {

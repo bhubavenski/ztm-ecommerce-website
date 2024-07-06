@@ -1,13 +1,13 @@
-import { TAction, TState } from './user';
+import { TAction, TUserState } from './user';
 
-const INITIAL_STATE: TState = {
+const INITIAL_STATE: TUserState = {
   currentUser: null,
 };
 
 export const userReducer = (
-  state: TState = INITIAL_STATE,
+  state: TUserState = INITIAL_STATE,
   action: TAction
-): TState => {
+): TUserState => {
   const { type, payload } = action;
 
   switch (type) {

@@ -1,13 +1,13 @@
-import { TAction, TState } from './category';
+import { TCategoryAction, TCategoryState } from './category';
 
 const INITIAL_VALUE = {
   categoriesArr: [],
 };
 
 export const categoriesReducer = (
-  state: TState = INITIAL_VALUE,
-  action: TAction
-): TState => {
+  state: TCategoryState = INITIAL_VALUE,
+  action: TCategoryAction
+): TCategoryState => {
   const { type, payload } = action;
 
   switch (type) {
