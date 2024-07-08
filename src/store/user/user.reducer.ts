@@ -1,20 +1,20 @@
-import { TAction, TUserState } from './user';
+import { User } from 'firebase/auth';
+import { TUserState } from './user';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const INITIAL_STATE: TUserState = {
   currentUser: null,
 };
 
-export const userReducer = (
-  state: TUserState = INITIAL_STATE,
-  action: TAction
-): TUserState => {
-  const { type, payload } = action;
+export const userSlice = createSlice({
+  name: 'users',
+  initialState: INITIAL_STATE,
+  reducers: {
+    setCurrentUser(state: TUserState, action: PayloadAction<User>) {
+      state.currentUser = action.payload;
+    },
+  },
+});
 
-  switch (type) {
-    case 'user/SET_CURRENT_USER': {
-      return { ...state, currentUser: payload };
-    }
-    default:
-      return state;
-  }
-};
+export const { setCurrentUser } = userSlice.actions;
+export const userReducer = userSlice.reducer;

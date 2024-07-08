@@ -1,10 +1,7 @@
-import { combineReducers, Reducer } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 import { userReducer } from './user/user.reducer';
 import { categoriesReducer } from './categories/category.reducer';
 import { cartReducer } from './cart/cart.reducer';
-import { TCartState, TCartAction } from './cart/cart';
-import { TCategoryState, TCategoryAction } from './categories/category';
-import { TUserState, TAction } from './user/user';
 
 export const rootReducer = combineReducers({
   user: userReducer,

@@ -1,9 +1,9 @@
 import Navigation from '@/components/navigation/navigation.component';
-import { setCurrentUser } from '@/store/user/user.action';
+import { setCurrentUser } from '@/store/user/user.reducer';
 import {
   createUserDocFromAuth,
   onAuthStateChangedListener,
-} from '@/utils/firebase/firebase.utils';
+} from '@/utils/firebase/firebase.utils'; 
 import { User } from 'firebase/auth';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';

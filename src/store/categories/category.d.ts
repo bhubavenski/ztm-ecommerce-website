@@ -3,8 +3,6 @@ import { DocumentData } from 'firebase/firestore';
 
 export type TCategoryState = {
   categoriesArr: DocumentData[] | [];
-  isLoading: boolean,
-  error: string | null
 };
 
 export type TCATEGORIES_ACTION_TYPES =

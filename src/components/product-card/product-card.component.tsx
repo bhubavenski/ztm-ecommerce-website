@@ -1,8 +1,7 @@
 import { Button } from '../ui/button';
 import { TProduct } from '@/types';
 import './product-card.styles.scss';
-import { addItemToCart } from '@/store/cart/cart.action';
-import { selectCartItems } from '@/store/cart/cart.selector';
+import { addItemToCart } from '@/store/cart/cart.reducer';
 import { useDispatch, useSelector } from 'react-redux';
 
 type Props = {
@@ -12,9 +11,8 @@ type Props = {
 const ProductCard = ({ product }: Props) => {
   const { name, price, imageUrl } = product;
   const dispatch = useDispatch();
-  const cartItems = useSelector(selectCartItems);
 
-  const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
+  const addProductToCart = () => dispatch(addItemToCart(product));
 
   return (
     <div className="product-card-container">

@@ -13,7 +13,7 @@ import {
   clearItemFromCart,
   addItemToCart,
   removeItemFromCart,
-} from '@/store/cart/cart.action';
+} from '@/store/cart/cart.reducer';
 
 const CheckOut = () => {
   const cartItems = useSelector(selectCartItems);
@@ -33,11 +33,9 @@ const CheckOut = () => {
       </TableHeader>
       <TableBody>
         {cartItems.map((item) => {
-          const clearItemHandler = () =>
-            dispatch(clearItemFromCart(cartItems, item));
-          const addItemHandler = () => dispatch(addItemToCart(cartItems, item));
-          const removeItemHandler = () =>
-            dispatch(removeItemFromCart(cartItems, item));
+          const clearItemHandler = () => dispatch(clearItemFromCart(item));
+          const addItemHandler = () => dispatch(addItemToCart(item));
+          const removeItemHandler = () => dispatch(removeItemFromCart(item));
           return (
             <TableRow key={item.id}>
               <TableCell>
