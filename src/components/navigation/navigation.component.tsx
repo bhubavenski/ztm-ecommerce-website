@@ -11,8 +11,6 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '@/store/user/user.selector.ts';
 
 const Navigation = () => {
-  console.log('Nav component rendered')
-
   const currentUser = useSelector(selectCurrentUser);
 
   const signOutHandler = async () => {

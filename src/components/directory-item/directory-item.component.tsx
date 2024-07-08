@@ -16,7 +16,7 @@ const DirectoryItem = ({ category }: TProps) => {
   const onClickHandler = () => navigate(route);
   return (
     <DirectoryItemContainer onClick={onClickHandler}>
-      <BackgroundImage imageUrl={imageUrl} />
+      <BackgroundImage $imageUrl={imageUrl} />
       <Body>
         <h2>{title}</h2>
         <p>Shop Now</p>

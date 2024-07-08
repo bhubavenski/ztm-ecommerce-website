@@ -11,7 +11,7 @@ export const selectCategories = createSelector(
 export const makeSelectProductsByCategory = (categoryTitle: string) =>
   createSelector([selectCategories], (categories) => {
     const category = categories.find(
-      (category) => category.title === categoryTitle
+      (category) => category.title.toLowerCase() === categoryTitle.toLowerCase()
     );
     return category ? category.products : [];
   });

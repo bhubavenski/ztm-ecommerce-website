@@ -8,12 +8,10 @@ import { TProduct } from '@/types';
 import { RootState } from '@/store/root-reducer';
 
 const Category = () => {
-  console.log('MyComponent rendered');
-
   const { category } = useParams();
   const selectProducts = useMemo(() => makeSelectProductsByCategory(category || ''), [category]);
   const products = useSelector(selectProducts);
-
+  
   return (
     <Fragment>
       <Title>{category?.toUpperCase()}</Title>

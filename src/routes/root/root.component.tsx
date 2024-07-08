@@ -10,8 +10,6 @@ import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
 const Root = () => {
-  console.log('Root component rendered')
-
   const dispatch = useDispatch();
 
   useEffect(() => {
