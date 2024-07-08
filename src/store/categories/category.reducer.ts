@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TCategoryState } from './category';
 import { DocumentData } from 'firebase/firestore';
+
+export type TCategoryState = {
+  categoriesArr: DocumentData[] | [];
+};
 
 const INITIAL_STATE: TCategoryState = {
   categoriesArr: [],

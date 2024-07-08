@@ -1,31 +1,5 @@
-// import { TCartAction, TCartState } from './cart';
-
-// const INITIAL_STATE: TCartState = {
-//   cartItems: [],
-//   cartCount: 0,
-//   cartTotal: 0,
-// };
-
-// export const cartReducer = (
-//   state: TCartState = INITIAL_STATE,
-//   action: TCartAction
-// ): TCartState => {
-//   const { type, payload } = action;
-
-//   switch (type) {
-//     case 'cart/SET_CART_ITEMS':
-//       return {
-//         ...state,
-//         cartItems: payload,
-//       };
-//     default:
-//       return state;
-//   }
-// };
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TProduct } from '@/types';
-import { TCartState } from './cart';
 
 export const addCartItem = (cartItems: TProduct[], productToAdd: TProduct) => {
   const existingCartItem = cartItems.find(
@@ -63,6 +37,10 @@ const clearCartItem = (cartItems: TProduct[], productToClear: TProduct) => {
   return cartItems.filter((cartItem) => cartItem.id !== productToClear.id);
 };
 
+export type TCartState = {
+  cartItems: TProduct[];
+};
+
 const INITIAL_STATE: TCartState = {
   cartItems: [],
 };
@@ -83,5 +61,6 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addItemToCart, removeItemFromCart, clearItemFromCart } = cartSlice.actions;
+export const { addItemToCart, removeItemFromCart, clearItemFromCart } =
+  cartSlice.actions;
 export const cartReducer = cartSlice.reducer;

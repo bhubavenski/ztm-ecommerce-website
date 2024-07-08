@@ -1,6 +1,9 @@
 import { User } from 'firebase/auth';
-import { TUserState } from './user';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+export type TUserState = {
+  currentUser: User | null;
+};
 
 const INITIAL_STATE: TUserState = {
   currentUser: null,
