@@ -11,6 +11,8 @@ import Category from './routes/category/category.component.tsx';
 import { store } from './store/store.ts';
 import Root from './routes/root/root.component.tsx';
 import React from 'react';
+import {Elements} from '@stripe/react-stripe-js'
+import { stripePromise } from './utils/stripe/stripe.utils.ts';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -49,7 +51,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <Elements stripe={stripePromise}>
+        <RouterProvider router={router} />
+      </Elements>
     </Provider>
   </React.StrictMode>
 );
