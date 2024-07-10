@@ -6,13 +6,12 @@ import { useSelector } from 'react-redux';
 import { selectCartTotal } from '../../store/cart/cart.selector';
 import { selectCurrentUser } from '../../store/user/user.selector';
 
-import { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
 import {
   PaymentFormContainer,
   FormContainer,
-  PaymentButton,
 } from './payment-form.styles';
+
 import { Button } from '../ui/button';
 
 const ifValidCardElement = (
